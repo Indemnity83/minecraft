@@ -7,7 +7,7 @@ The container is based on openjdk:15-jdk-alpine and will likely compile for any 
 
 ## Usage
 
-The container is built to run a singe minecraft server instance and to be adminstrated using RCON. There are no screens, no supervisors or other "service managers" The image starts, grabs the jar file for the server you specified if a minecraft_server.jar doesn't already exist and runs. 
+The container is built to run a singe minecraft server instance and to be adminstrated using RCON. The image starts, grabs the jar file for the server you specified if a minecraft_server.jar doesn't already exist and runs supervisor to start the actuall minecraft server as well as a web based RCON client on port 4326. 
 
 If you want to run Forge, Spigot or some other flavor you'll need to patch the minecraft_server.jar file outside of this image. Don't forget to update the minecraft_server.jar.sha1 as we do check it before launching to make sure things haven't been corrupted somehow.  
 
@@ -21,6 +21,8 @@ docker create \
   -v /path/to/minecraft/instance:/minecraft \
   -p 25565:25565
   -p 25575:25575
+  -p 4326:4326
+  -p 4327:4327
   indemnity83/minecraft
 ```
 

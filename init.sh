@@ -24,6 +24,3 @@ fi
 if [ -f $JAR_FILE.sha1 ]; then 
     sha1sum -c $JAR_FILE.sha1
 fi
-
-## Launch minecraft straight up
-java -Xmx$JAVA_XMX -Xms$JAVA_XMS $JAVA_ARGS -jar $JAR_FILE nogui $JAR_ARGS
