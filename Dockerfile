@@ -1,4 +1,4 @@
-FROM openjdk:15-jdk-alpine
+FROM openjdk:8-jdk-alpine
 LABEL maintainer="Kyle Klaus <kklaus@indemnity83.com>"
 
 # Minecraft Version
