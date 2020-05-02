@@ -44,13 +44,13 @@ stop: ## Stop a running container
 release: build-nc publish ## Make a release by building and publishing the `{version}` and `latest` tagged containers to Dockerhub
 
 # Docker publish
-publish: publish-latest publish-version ## Publish the `{version}` and `latest` tagged containers to Dockerhub'
+publish: git-release publish-latest publish-version ## Publish the `{version}` and `latest` tagged containers to Dockerhub'
 
 publish-latest: tag-latest ## Publish the `latest` taged container to Dockerhub'
 	@echo 'publish latest to $(IMAGE_ORG)'
 	docker push $(IMAGE_ORG)/$(IMAGE_NAME):latest
 
-publish-version: tag-version ## Publish the `{version}` taged container to Dockerhub'
+publish-version: git-release tag-version ## Publish the `{version}` taged container to Dockerhub'
 	@echo 'publish $(VERSION) to $(IMAGE_ORG)'
 	docker push $(IMAGE_ORG)/$(IMAGE_NAME):$(VERSION)
 
@@ -65,6 +65,10 @@ tag-latest: build ## Generate container `latest` tag
 tag-version: build ## Generate container `{version}` tag
 	@echo 'create tag $(VERSION)'
 	docker tag $(IMAGE_NAME) $(IMAGE_ORG)/$(IMAGE_NAME):$(VERSION)
+
+git-release: ## Generate container `{version}` tag
+	@echo 'git release v$(VERSION)'
+	git tag -a v$(VERSION) -m "Version ${VERSION}" && git push origin v${VERSION}
 
 version: ## Output the current version
 	@echo $(VERSION)
