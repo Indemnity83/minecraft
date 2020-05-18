@@ -18,7 +18,7 @@ ARG UID=99
 ARG GID=100
 
 # Install packages
-RUN apk --no-cache add jq wget shadow nodejs npm supervisor
+RUN apk --no-cache add jq wget shadow supervisor
 
 # Copy the init script into the container
 COPY init.sh /bin/init
@@ -28,11 +28,8 @@ COPY supervisord.conf /etc/supervisord.conf
 RUN useradd -r -u $UID -o minecraft && \
     groupmod -g $GID -o minecraft
 
-# Deploy rcon web admin
+# Deploy web admin
 WORKDIR /app
-COPY rcon-web-admin/ /app
-RUN npm install && \
-    node src/main.js install-core-widgets
 
 # Setup folders and permissions
 RUN mkdir -p /minecraft && \
