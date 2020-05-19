@@ -1,1 +1,41 @@
+# Runtime caches & logs
+bootstrap/cache/*
+storage/app/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
+storage/nginx/*
+storage/sites/*
+storage/.ssh/*
+
+# Docker stuff
+Dockerfile
 run
+
+# Development & Config
+**.dockerignore
+**.git
+**.gitattributes
+**.gitignore
+**.sqlite*
+*.env*
+.editorconfig
+.idea
+.php_cs.*
+.styleci.yml
+.version
+Makefile
+npm-debug.log
+
+# Composer assets
+vendor
+
+# NPM assets
+node_modules
+public/css
+public/js
+public/mix-manifest.json
+
+# Exceptions
+!.env.docker

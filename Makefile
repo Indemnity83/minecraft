@@ -6,9 +6,8 @@ IMAGE_ORG = indemnity83
 MC_VERSION=latest
 
 SERVER_PORT=25565
-RCON_PORT=25575
-WEB_PORT=4326
-WEB_SOCKET=4327
+WEB_PORT=8888
+WEB_SOCKET=6001
 VOLUME=`pwd`/run/
 
 # HELP
@@ -31,7 +30,7 @@ build-nc: ## Build the container without caching
 	docker build --no-cache -t $(IMAGE_NAME) .
 
 run: ## Run container on port configured in `.env`
-	docker run -it --rm -v $(VOLUME):/minecraft -p $(SERVER_PORT):25565 -p $(RCON_PORT):25575 -p $(WEB_PORT):4326 -p $(WEB_SOCKET):4327 --name "$(IMAGE_NAME)" $(IMAGE_NAME)
+	docker run -it --rm -v $(VOLUME):/data -p $(SERVER_PORT):25565 -p $(WEB_PORT):8888 -p $(WEB_SOCKET):6001 --name "$(IMAGE_NAME)" $(IMAGE_NAME)
 
 up: build run ## Build the container then run it
 
@@ -74,4 +73,3 @@ git-release: ## Generate container `{version}` tag
 
 version: ## Output the current version
 	@echo $(VERSION)
-	
