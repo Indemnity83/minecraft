@@ -30,7 +30,7 @@ return [
             'path' => env('PUSHER_APP_PATH'),
             'capacity' => null,
             'enable_client_messages' => false,
-            'enable_statistics' => true,
+            'enable_statistics' => false,
         ],
     ],
 
@@ -73,31 +73,7 @@ return [
         Authorize::class,
     ],
 
-    'statistics' => [
-        /*
-         * This model will be used to store the statistics of the WebSocketsServer.
-         * The only requirement is that the model should extend
-         * `WebSocketsStatisticsEntry` provided by this package.
-         */
-        'model' => \BeyondCode\LaravelWebSockets\Statistics\Models\WebSocketsStatisticsEntry::class,
-
-        /*
-         * Here you can specify the interval in seconds at which statistics should be logged.
-         */
-        'interval_in_seconds' => 60,
-
-        /*
-         * When the clean-command is executed, all recorded statistics older than
-         * the number of days specified here will be deleted.
-         */
-        'delete_statistics_older_than_days' => 60,
-
-        /*
-         * Use an DNS resolver to make the requests to the statistics logger
-         * default is to resolve everything to 127.0.0.1.
-         */
-        'perform_dns_lookup' => false,
-    ],
+    'enable_statistics' => false,
 
     /*
      * Define the optional SSL context for your WebSocket connections.
