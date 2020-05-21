@@ -1,3 +1,5 @@
+const mix = require('laravel-mix');
+
 module.exports = {
     theme: {
         extend: {
@@ -8,4 +10,12 @@ module.exports = {
     plugins: [
         require('@tailwindcss/ui'),
     ],
-}
+    purge: {
+        mode: 'all',
+        enabled: mix.inProduction(),
+        content: [
+            './resources/js/**/*.js',
+            './resources/js/**/*.vue',
+        ],
+    },
+};
