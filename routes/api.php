@@ -11,4 +11,4 @@
 |
 */
 
-//
+Route::apiResource('servers', 'ServerController');
