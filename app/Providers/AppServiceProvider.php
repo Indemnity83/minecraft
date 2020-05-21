@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
+use Mtdowling\Supervisor\EventNotification;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
 
                 return $value;
             });
+        });
+
+        $this->app->bind(EventNotification::class, function ($app) {
+            return new EventNotification;
         });
     }
 }

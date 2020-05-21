@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cae18431c23a115a4dd477a4504026ee",
+    "content-hash": "fe61de51c767bd9f47adff85c828ec6a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1431,6 +1431,48 @@
                 "psr-3"
             ],
             "time": "2019-12-20T14:22:59+00:00"
+        },
+        {
+            "name": "mtdowling/supervisor-event",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mtdowling/php-supervisor-event.git",
+                "reference": "28a4a938ddce10a00aa22b052e12106610c3fe7a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mtdowling/php-supervisor-event/zipball/28a4a938ddce10a00aa22b052e12106610c3fe7a",
+                "reference": "28a4a938ddce10a00aa22b052e12106610c3fe7a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "component",
+            "autoload": {
+                "psr-0": {
+                    "Mtdowling\\Supervisor": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Wires callback functions to Supervisor events",
+            "keywords": [
+                "event",
+                "supervisor",
+                "supervisord"
+            ],
+            "time": "2012-07-22T22:14:43+00:00"
         },
         {
             "name": "nesbot/carbon",
