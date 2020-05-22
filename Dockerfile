@@ -36,11 +36,11 @@ ARG UID=99
 ARG GID=100
 
 # Install packages
-RUN apk --no-cache add jq wget shadow supervisor git composer nginx \
+RUN apk --no-cache add jq wget shadow supervisor git composer nginx redis \
     php php7-fpm php7-json php7-mbstring php7-iconv php7-pcntl php7-posix php7-sodium \
     php7-session php7-xml php7-curl php7-fileinfo php7-gd php7-intl php7-zip \
     php7-simplexml php7-pdo php7-sqlite3 php7-pdo_sqlite php7-exif php7-pdo_mysql \
-    php7-pdo_pgsql php7-pdo_odbc php7-dom php7-xmlwriter php7-tokenizer
+    php7-pdo_pgsql php7-pdo_odbc php7-dom php7-xmlwriter php7-tokenizer php7-redis
 
 # Copy the init script into the container
 COPY docker/rootfs /

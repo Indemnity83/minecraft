@@ -9,6 +9,7 @@ mkdir -p storage/framework/sessions
 mkdir -p storage/framework/views
 mkdir -p storage/logs
 mkdir -p storage/servers
+mkdir -p storage/queue
 
 touch storage/database.sqlite
 
