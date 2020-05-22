@@ -50,8 +50,7 @@ class SupervisorListen extends Command
      */
     public function handle()
     {
-        $this->listener->listen(function(EventListener $listener, EventNotification $event) {
-
+        $this->listener->listen(function (EventListener $listener, EventNotification $event) {
             $processName = $event->getData('processname');
             $eventName = $event->getData('eventname');
 

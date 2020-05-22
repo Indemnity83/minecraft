@@ -12,3 +12,4 @@
 */
 
 Route::apiResource('servers', 'ServerController');
+Route::put('servers/{server}/signal', 'ServerSignalController');

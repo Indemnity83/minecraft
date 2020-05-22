@@ -50,11 +50,11 @@ class ServerController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Server  $server
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Server $server)
     {
-        //
+        return response()->json($server);
     }
 
     /**
