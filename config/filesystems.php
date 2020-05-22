@@ -50,7 +50,7 @@ return [
 
         'supervisor' => [
             'driver' => 'local',
-            'root' => storage_path('app/supervisor'),
+            'root' => storage_path('supervisor'),
         ],
 
         'local' => [
