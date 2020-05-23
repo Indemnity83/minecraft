@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Events\ServerUpdated;
 use App\Profiles\Vanilla;
 use App\Server;
 use Illuminate\Bus\Queueable;
@@ -10,7 +9,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class InstallServer implements ShouldQueue
@@ -47,8 +45,6 @@ class InstallServer implements ShouldQueue
 
         $this->server->status = 'installed';
         $this->server->save();
-
-        broadcast(new ServerUpdated($this->server));
 
         exec('supervisorctl update', $output);
     }

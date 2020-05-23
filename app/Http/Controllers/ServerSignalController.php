@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\ServerUpdated;
 use App\Jobs\SignalServer;
 use App\Server;
 use Illuminate\Http\JsonResponse;
@@ -27,7 +26,6 @@ class ServerSignalController extends Controller
         $server->status = "{$request->signal} pending";
         $server->save();
 
-        broadcast(new ServerUpdated($server))->toOthers();
         dispatch(new SignalServer($server, $request->signal));
 
         return response()->json($server->fresh());

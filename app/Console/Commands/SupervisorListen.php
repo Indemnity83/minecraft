@@ -2,8 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Events\ProcessStatusUpdate;
-use App\Events\ServerUpdated;
 use App\Server;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
@@ -60,8 +58,6 @@ class SupervisorListen extends Command
             if ($server) {
                 $server->status = Str::of($eventName)->lower()->after('process_state_');
                 $server->save();
-
-                broadcast(new ServerUpdated($server));
             }
 
             return true;

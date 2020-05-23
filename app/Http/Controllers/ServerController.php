@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\ServerCreated;
-use App\Events\ServerUpdated;
 use App\Jobs\InstallServer;
 use App\Server;
 use Illuminate\Http\Request;
@@ -40,7 +38,6 @@ class ServerController extends Controller
         $server->status = 'installing';
         $server->save();
 
-        broadcast(new ServerCreated($server))->toOthers();
         dispatch(new InstallServer($server));
 
         return response()->json($server->fresh());

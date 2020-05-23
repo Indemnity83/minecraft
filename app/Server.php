@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Events\ServerCreated;
+use App\Events\ServerUpdated;
 use App\Profiles\Profile;
 use Facades\App\Profiles\ProfileFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +11,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 /**
- * @property integer id
+ * @property int id
  * @property string name
  * @property string slug
  * @property string directory
@@ -17,7 +19,7 @@ use Illuminate\Support\Str;
  * @property string profile
  * @property string version
  * @property string jar_file
- * @property boolean eula
+ * @property bool eula
  */
 class Server extends Model
 {
@@ -41,6 +43,18 @@ class Server extends Model
     ];
 
     /**
+     * The event map for the model.
+     *
+     * Allows for object-based events for native Eloquent events.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ServerCreated::class,
+        'updated' => ServerUpdated::class,
+    ];
+
+    /**
      * Get the full path of the servers file directory.
      *
      * @return string
@@ -58,9 +72,9 @@ class Server extends Model
 
     public function getEulaAttribute()
     {
-        $file = $this->directory . DIRECTORY_SEPARATOR . 'eula.txt';
+        $file = $this->directory.DIRECTORY_SEPARATOR.'eula.txt';
 
-        if(!file_exists($file)) {
+        if (! file_exists($file)) {
             return false;
         }
 
