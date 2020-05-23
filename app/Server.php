@@ -5,8 +5,11 @@ namespace App;
 use App\Profiles\Profile;
 use Facades\App\Profiles\ProfileFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 /**
+ * @property integer id
  * @property string name
  * @property string slug
  * @property string directory
@@ -14,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string profile
  * @property string version
  * @property string jar_file
+ * @property boolean eula
  */
 class Server extends Model
 {
@@ -25,6 +29,15 @@ class Server extends Model
     protected $fillable = [
         'name',
         'version',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'eula',
     ];
 
     /**
@@ -41,6 +54,19 @@ class Server extends Model
         ]);
 
         return storage_path($directory);
+    }
+
+    public function getEulaAttribute()
+    {
+        $file = $this->directory . DIRECTORY_SEPARATOR . 'eula.txt';
+
+        if(!file_exists($file)) {
+            return false;
+        }
+
+        preg_match('/eula=(.*)/', file_get_contents($file), $agreement);
+
+        return Str::lower(Arr::get($agreement, 1)) === 'true';
     }
 
     /**

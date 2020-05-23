@@ -11,7 +11,12 @@
                     <span class="ml-8">{{ server.profile }}</span>
                     <span class="ml-8">{{ server.version }}</span>
                     <span class="ml-8">port {{ server.port }}</span>
-                    <span class="ml-8">{{ server.status }}</span>
+                    <span class="ml-8">
+                        {{ server.status }}
+                        <font-awesome-icon v-if="busy" class="ml-1 h-5 w-5 text-info-700 opacity-75" :icon="['fas', 'circle-notch']" spin />
+                        <font-awesome-icon v-if="stopped" class="ml-1 h-5 w-5 text-danger-700 opacity-75" :icon="['fas', 'times-circle']" />
+                        <font-awesome-icon v-if="running" class="ml-1 h-5 w-5 text-success-700 opacity-75" :icon="['fas', 'check-circle']" />
+                    </span>
                 </div>
             </div>
         </header>
@@ -38,7 +43,22 @@
                     </nav>
                 </div>
                 <div class="flex-1">
-                    <server-actions :server="server"></server-actions>
+
+                    <div v-if="! server.eula" class="rounded-md bg-warning-100 p-4 shadow mb-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <font-awesome-icon class="h-5 w-5 text-warning-500" :icon="['fas', 'exclamation-triangle']" />
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm leading-5 font-medium text-warning-800">
+                                    You need to agree to the EULA in order to run the server. Go to eula.txt for more info.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <server-actions :server="server" class="mb-4"></server-actions>
                 </div>
             </div>
         </main>
@@ -63,6 +83,37 @@
             }
         },
 
+        computed: {
+            busy: function () {
+                return _.includes([
+                    'start pending',
+                    'start pending',
+                    'restart pending',
+                    'starting',
+                    'backoff',
+                    'stop pending',
+                    'stopping',
+                    'unknown',
+                    'installing',
+                ], this.server.status);
+            },
+
+            running: function () {
+                return _.includes([
+                    'running',
+                ], this.server.status);
+            },
+
+            stopped: function () {
+                return _.includes([
+                    'exited',
+                    'stopped',
+                    'fatal',
+                    'installed',
+                ], this.server.status);
+            },
+        },
+
         methods: {
             getServer() {
                 axios.get(`/api/servers/${this.serverId}`)
@@ -85,7 +136,7 @@
                             this.server = e.server
                         }
                     });
-            }
+            },
         },
 
         created() {
